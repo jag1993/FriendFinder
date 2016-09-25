@@ -43,12 +43,26 @@ app.get('/survey.html', function (req, res) {
 });
 
 
-// ACCEPTS GET RESPONSE FROM SURVEY.HTML
-app.get('/api/friends', function (req, res) {	
-// ADD THE CONTENTS OF YOUR MODAL HERE
-		res.json("YOU WORK");
-	
+
+
+// THIS FUNCTION WILL SHOW ALL POSSIBLE DATES
+app.get('/api/show', function (req, res) {	
+		console.log(req.params);
+		res.json(characters);
 });
+
+
+
+// OK SO I SOLVED THE PROBLEM OF GETTING THE RESPONSE 
+app.post('/api/friends', function (req, res) {
+	var newfriend = req.body;
+	console.log(newfriend);
+	res.json(characters[1]);
+});
+
+
+
+
 
 app.listen(PORT, function () {
 	console.log('App listening on PORT ' + PORT);

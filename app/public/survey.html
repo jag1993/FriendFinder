@@ -27,7 +27,7 @@
             <option value="4">4</option>
             <option value="5">5 (Strongly Like)</option>
       	</select>
-
+<!-- 
     	<h4>Do you like video games?</h4>
 	 	<select data-placeholder="" class="form-control"  id="q2">
 	 		<option value=""></option>
@@ -117,16 +117,39 @@
             <option value="3">3</option>
             <option value="4">4</option>
             <option value="5">5 (Strongly Like)</option>
-      	</select>
+      	</select> -->
       	</br>
       	<button type="submit" class="btn btn-submit btn-block" id="submit">Submit</button>
+        <button  class="btn btn-submit btn-block" id="show">Show</button>
+  </div>
 
-
-    </div>
 </div>
 
-<script type="text/javascript"> 
 
+
+<!-- MODAL -->
+<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+        <h4 class="modal-title">Your Match</h4>
+      </div>
+      <div class="modal-body" id="results">
+
+      <!-- APPEND STUFF HERE :MODAL BODY -->
+       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>s
+</div>
+
+
+<script type="text/javascript"> 
+var currentURL = 'http://localhost:7015'; 
 $("#submit").on("click", function(){
     	// Form validation
     	function validateForm() {
@@ -152,10 +175,15 @@ $("#submit").on("click", function(){
 	    		scores: [$("#q1").val(), $("#q2").val(), $("#q3").val(), $("#q4").val(), $("#q5").val(), $("#q6").val(), $("#q7").val(), $("#q8").val(), $("#q9").val(), $("#q10").val(), ]
 	    	}
 
-//TELL THIS TO SEND DATA TO SERVER FILE
-	    	var currentURL = 'http://localhost:7015'; 
-	    	$.get(currentURL + "/api/friends", userData, function(data){
-	    	console.log(data);
+	    	// THIS WORKS SO JUST WORK ON LOGIC AND HOW TO SEPARATE ALL OF THESE INTO THE JS FILES
+	    	$.post(currentURL + "/api/friends", userData, function(data){
+             $('#results').append(JSON.stringify(data));
+          if(data){
+            console.log(data);
+            $('#myModal').modal('show');
+          }
+
+	    
 	    	});
 
 		}else{
@@ -165,6 +193,16 @@ $("#submit").on("click", function(){
     	return false;
     });
 	
+
+  // THIS ONE SHOWS ALL POSSIBLE FRIENDS, I THINK THIS SHOULD BE IN A DIFFERENT JS FILE
+$("#show").on("click", function(){
+        $.get(currentURL + "/api/show", function(data){
+            console.log(data);
+        });
+});
+
+
+
 </script>
 
 
