@@ -27,7 +27,7 @@
             <option value="4">4</option>
             <option value="5">5 (Strongly Like)</option>
       	</select>
-<!-- 
+
     	<h4>Do you like video games?</h4>
 	 	<select data-placeholder="" class="form-control"  id="q2">
 	 		<option value=""></option>
@@ -117,7 +117,7 @@
             <option value="3">3</option>
             <option value="4">4</option>
             <option value="5">5 (Strongly Like)</option>
-      	</select> -->
+      	</select>
       	</br>
       	<button type="submit" class="btn btn-submit btn-block" id="submit">Submit</button>
         <button  class="btn btn-submit btn-block" id="show">Show</button>
@@ -137,14 +137,15 @@
       </div>
       <div class="modal-body" id="results">
 
-      <!-- APPEND STUFF HERE :MODAL BODY -->
+      <h3 id="nameFriend"></h3>
+      <img src="" id="photoFriend">
        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
-  </div>s
+  </div>
 </div>
 
 
@@ -172,12 +173,18 @@ $("#submit").on("click", function(){
 	    	var userData = {
 	    		name: $("#name").val(),
 	    		photo: $("#photo").val(),
-	    		scores: [$("#q1").val(), $("#q2").val(), $("#q3").val(), $("#q4").val(), $("#q5").val(), $("#q6").val(), $("#q7").val(), $("#q8").val(), $("#q9").val(), $("#q10").val(), ]
+	    		scores: [$("#q1").val(), $("#q2").val(), $("#q3").val(), $("#q4").val(), $("#q5").val(), $("#q6").val(), $("#q7").val(), $("#q8").val(), $("#q9").val(), $("#q10").val()]
 	    	}
 
 	    	// THIS WORKS SO JUST WORK ON LOGIC AND HOW TO SEPARATE ALL OF THESE INTO THE JS FILES
-	    	$.post(currentURL + "/api/friends", userData, function(data){
-             $('#results').append(JSON.stringify(data));
+	    	$.post(currentURL + "/api/friends", userData, function(data){ 
+          var nameFriend = data.name;
+          var photoFriend = data.photo;
+
+          $("#nameFriend").text(nameFriend);
+          $("#photoFriend").attr("style","width:150px;height:100px;")
+          $("#photoFriend").attr("src",photoFriend);
+
           if(data){
             console.log(data);
             $('#myModal').modal('show');
