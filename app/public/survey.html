@@ -50,7 +50,7 @@
             <option value="5">5 (Strongly Like)</option>
       	</select>
 
-   	<h4>Do you like dogs?</h4>
+   	<h4>Do you like watching horror movies?</h4>
 	 	<select data-placeholder="" class="form-control"  id="q4">
 	 		<option value=""></option>
             <option value="1">1 (Strongly Hate)</option>
@@ -60,7 +60,7 @@
             <option value="5">5 (Strongly Like)</option>
       	</select>
 
-	<h4>Cats?</h4>
+	<h4>Do you like talking on AOL?</h4>
 	 	<select data-placeholder="" class="form-control"  id="q5">
 	 		<option value=""></option>
             <option value="1">1 (Strongly Hate)</option>
@@ -70,7 +70,7 @@
             <option value="5">5 (Strongly Like)</option>
       	</select>
 
-     <h4>Netflix?</h4>
+     <h4>Do you listen to the radio?</h4>
 	 	<select data-placeholder="" class="form-control"  id="q6">
 	 		<option value=""></option>
             <option value="1">1 (Strongly Hate)</option>
@@ -80,7 +80,7 @@
             <option value="5">5 (Strongly Like)</option>
       	</select>
 
-     <h4>Beer?</h4>
+     <h4>Do you like art?</h4>
 	 	<select data-placeholder="" class="form-control"  id="q7">
 	 		<option value=""></option>
             <option value="1">1 (Strongly Hate)</option>
@@ -90,7 +90,7 @@
             <option value="5">5 (Strongly Like)</option>
       	</select>
 
-      <h4>Trump?</h4>
+      <h4>Do you like MTV?</h4>
 	 	<select data-placeholder="" class="form-control"  id="q8">
 	 		<option value=""></option>
             <option value="1">1 (Strongly Hate)</option>
@@ -100,7 +100,7 @@
             <option value="5">5 (Strongly Like)</option>
       	</select>
 
-      <h4>Clinton?</h4>
+      <h4>Did you like playing with Pokemon or Polly Pockets?</h4>
 	 	<select data-placeholder="" class="form-control"  id="q9">
 	 		<option value=""></option>
             <option value="1">1 (Strongly Hate)</option>
@@ -110,7 +110,7 @@
             <option value="5">5 (Strongly Like)</option>
       	</select>
 
-       <h4>Pokemon Go?</h4>
+       <h4>Do you like Gameboys?</h4>
 	 	<select data-placeholder="" class="form-control"  id="q10">
 	 		<option value=""></option>
             <option value="1">1 (Strongly Hate)</option>
@@ -120,15 +120,17 @@
             <option value="5">5 (Strongly Like)</option>
       	</select>
       	</br>
-      	<button type="submit" class="btn btn-submit btn-block" id="submit">Submit</button>
-        <button  class="btn btn-submit btn-block" id="show">Show</button>
+      	<button type="submit" class="btn btn-success btn-block" id="submit">Submit</button>
+        <button  class="btn btn-success btn-block" id="show">Show</button> </br>
+
+        <h1><a href="home.html"> Home</a></h1>
   </div>
 
 </div>
 
 
 
-<!-- MODAL -->
+<!-- MODAL Match -->
 <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -150,68 +152,38 @@
 </div>
 
 
-<script type="text/javascript"> 
-var currentURL = 'http://localhost:7015'; 
-$("#submit").on("click", function(){
-    	// Form validation
-    	function validateForm() {
-		  var isValid = true;
-		  $('.form-control').each(function() {
-		    if ( $(this).val() === '' )
-		        isValid = false;
-		  });
 
-		  $('.chosen-select').each(function() {
 
-		  	if( $(this).val() === "")
-		  		isValid = false
-		  })
-		  return isValid;
-		}
-		// If all required fields are filled
-		if (validateForm() == true){
-			// Create an object for the user's data
-	    	var userData = {
-	    		name: $("#name").val(),
-	    		photo: $("#photo").val(),
-	    		scores: [$("#q1").val(), $("#q2").val(), $("#q3").val(), $("#q4").val(), $("#q5").val(), $("#q6").val(), $("#q7").val(), $("#q8").val(), $("#q9").val(), $("#q10").val()]
-	    	}
+<!-- MODAL Match -->
+<div class="modal fade" tabindex="-1" role="dialog" id="myModal2">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+        <h4 class="modal-title">Potential Matches</h4>
+      </div>
+      <div class="modal-body" id="potentialMatches" style="overflow:scroll;">
 
-	    	// THIS WORKS SO JUST WORK ON LOGIC AND HOW TO SEPARATE ALL OF THESE INTO THE JS FILES
-	    	$.post(currentURL + "/api/friends", userData, function(data){ 
-          var nameFriend = data.name;
-          var photoFriend = data.photo;
+     
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> </br>
 
-          $("#nameFriend").text(nameFriend);
-          $("#photoFriend").attr("style","width:150px;height:100px;")
-          $("#photoFriend").attr("src",photoFriend);
 
-          if(data){
-            console.log(data);
-            $('#myModal').modal('show');
-          }
-
-	    
-	    	});
-
-		}else{
-			alert("Please answer all questions");
-		}
-    	
-    	return false;
-    });
-	
-
-  // THIS ONE SHOWS ALL POSSIBLE FRIENDS, I THINK THIS SHOULD BE IN A DIFFERENT JS FILE
-$("#show").on("click", function(){
-        $.get(currentURL + "/api/show", function(data){
-            console.log(data);
-        });
-});
+       
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
-</script>
+
+
+
+
+
+<script type="text/javascript" src="js/app.js"> </script>
 
 
 

@@ -39,9 +39,16 @@ function getSum(total, num) {
 
 });
 
-app.get('/api/show', function (req, res) {	
-		console.log(req.params);
-		res.json(friends);
+app.get('/api/show', function (req, res) {		
+var html;
+	html += '<ul>';
+		for (var i = 0; i < friends.length; i++) {
+			html += '<li><p> Name: ' + friends[i].name + '</p>' + ' </li>';
+			html += '<p>' + '<img src='+friends[i].photo+ '>' + ' </li>'+'</p>';
+		}
+
+		html += '</ul>';
+		res.send(html);
 });
 }
 
