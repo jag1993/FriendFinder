@@ -1,4 +1,4 @@
-var currentURL = 'http://localhost:7015'; 
+var currentURL = window.location.origin; 
 $("#submit").on("click", function(){
     	function validateForm() {
 		  var isValid = true;
