@@ -8,9 +8,11 @@ var friends = require('../data/friends.js');
 module.exports = function(app){
 app.post('/api/friends', function (req, res) {
 	var newFriend = req.body;
+	var newFriendScores = newFriend.scores;
+	var newFriendConvArr = newFriendScores.map(Number)
+	req.body.scores = newFriendConvArr;
 	friends.push(newFriend);
 	console.log(friends);
-// This has to be an algorithm to decide which match
 	res.json(friends[Math.floor(Math.random()*friends.length)]);
 });
 
